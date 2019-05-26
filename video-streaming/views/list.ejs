@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>This Video List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <ul>
+      <% filelist.forEach(function(file) { %>
+        <li>
+          <%= file %>
+        </li>
+      <% }); %>
+    </ul>
+  </body>
+
+  <script>
+      var list=document.getElementsByTagName('li');
+
+      for(var i=0; i<list.length; i++){
+        list.item(i).addEventListener('click', function() {
+          alert(`${list.item(i)} is clicked!`); //해당 파일 이름을 서버에 보내주고 싶음...
+        });
+      }
+    </script>
+</html>
