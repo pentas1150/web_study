@@ -7,9 +7,7 @@
   <body>
     <ul>
       <% filelist.forEach(function(file) { %>
-        <li>
-          <%= file %>
-        </li>
+        <li><%= file %></li>
       <% }); %>
     </ul>
   </body>
@@ -18,8 +16,11 @@
       var list=document.getElementsByTagName('li');
 
       for(var i=0; i<list.length; i++){
-        list.item(i).addEventListener('click', function() {
-          alert(`${list.item(i)} is clicked!`); //해당 파일 이름을 서버에 보내주고 싶음...
+        list.item(i).addEventListener('click', function(e) {
+          console.log(e.target.innerHTML);
+          var xhr=new XMLHttpRequest();
+          xhr.open('GET', `http://localhost:3000/list/${e.target.innerHTML}`);
+          xhr.send();
         });
       }
     </script>
