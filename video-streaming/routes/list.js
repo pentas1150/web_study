@@ -10,12 +10,12 @@ router.get('/', function(req, res, next) {
       if(err){
           throw err;
       }
-      res.render('list', { filelist: list })
+      res.render('list', { filelist: list, ip: process.env.BASE_IP })
   });
 });
 
 router.get('/:video', function(req, res, next) {
-    res.render('video', { videoname: req.params.video });
+    res.render('video', { ip: process.env.BASE_IP, videoname: req.params.video });
 });
 
 router.get('/player/:video', function(req, res, next) {
