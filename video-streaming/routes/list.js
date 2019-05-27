@@ -38,7 +38,7 @@ router.get('/player/:video', function(req, res, next) {
         res.writeHead(206, head);
         file.pipe(res);
     } else {
-         head = {
+         var head = {
             'Content-Length': fileSize,
             'Content-Type': 'video/mp4',
         };
