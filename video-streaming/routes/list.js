@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-var videoLocation = '/Users/jsh/git/video-streaming/public/video';
+require('dotenv').config();
+
+var videoLocation = process.env.VIDEO_PATH;
 
 router.get('/', function(req, res, next) {
   fs.readdir(videoLocation, function(err, list) {
