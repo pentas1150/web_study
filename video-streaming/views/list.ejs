@@ -14,13 +14,12 @@
 
   <script>
       var list=document.getElementsByTagName('li');
+      var baseUrl='http://192.168.0.12:3000';
 
       for(var i=0; i<list.length; i++){
         list.item(i).addEventListener('click', function(e) {
           console.log(e.target.innerHTML);
-          var xhr=new XMLHttpRequest();
-          xhr.open('GET', `http://localhost:3000/list/${e.target.innerHTML}`);
-          xhr.send();
+          window.location=`${baseUrl}/${e.target.innerHTML}`;
         });
       }
     </script>
