@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var fs = require('fs');
+const express = require('express');
+const router = express.Router();
+const fs = require('fs');
 require('dotenv').config();
 
-var videoLocation = process.env.VIDEO_PATH;
+const videoLocation = process.env.VIDEO_PATH;
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   fs.readdir(videoLocation, function(err, list) {
       if(err){
           throw err;
@@ -14,23 +14,23 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/:video', function(req, res, next) {
+router.get('/:video', (req, res, next) => {
     res.render('video', { ip: process.env.BASE_IP, videoname: req.params.video });
 });
 
 router.get('/player/:video', function(req, res, next) {
-    var path = `${videoLocation}/${req.params.video}`;
-    var stat = fs.statSync(path);
-    var fileSize = stat.size;
-    var range = req.headers.range;
+    const path = `${videoLocation}/${req.params.video}`;
+    const stat = fs.statSync(path);
+    const fileSize = stat.size;
+    const range = req.headers.range;
 
     if (range) {
-        var parts = range.replace(/bytes=/, "").split("-");
-        var start = parseInt(parts[0], 10);
-        var end = parts[1] ? parseInt(parts[1], 10) : fileSize-1;
-        var chunksize = (end-start)+1;
-        var file = fs.createReadStream(path, {start, end});
-        var head = {
+        const parts = range.replace(/bytes=/, "").split("-");
+        const start = parseInt(parts[0], 10);
+        const end = parts[1] ? parseInt(parts[1], 10) : fileSize-1;
+        const chunksize = (end-start)+1;
+        const file = fs.createReadStream(path, {start, end});
+        const head = {
             'Content-Range': `bytes ${start}-${end}/${fileSize}`,
             'Accept-Ranges': 'bytes',
             'Content-Length': chunksize,
@@ -40,7 +40,7 @@ router.get('/player/:video', function(req, res, next) {
         res.writeHead(206, head);
         file.pipe(res);
     } else {
-         var head = {
+         const head = {
             'Content-Length': fileSize,
             'Content-Type': 'video/mp4',
         };
