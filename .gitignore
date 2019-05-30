@@ -1,1 +1,4 @@
 node_modules/
+video/
+.env
+.DS_Store
