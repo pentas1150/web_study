@@ -10,7 +10,16 @@ router.get('/', (req, res, next) => {
       if(err){
           throw err;
       }
-      res.render('list', { filelist: list, ip: process.env.BASE_IP })
+      list.forEach(function(fileName) {
+        const nameLen = fileName.length;
+        const lastDot = fileName.lastIndexOf('.');
+        const fileExt = fileName.substring(lastDot, nameLen).toLowerCase();
+
+        if(fileExt!=='.mp4')
+            list.splice(list.indexOf(fileName), 1);
+      });
+
+      res.render('index', { filelist: list, ip: process.env.BASE_IP })
   });
 });
 

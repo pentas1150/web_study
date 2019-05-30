@@ -7,6 +7,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <h1>Video List</h1>
     <ul>
       <% filelist.forEach(function(file) { %>
         <li><%= file %></li>
@@ -20,7 +21,6 @@
 
       for(var i=0; i<list.length; i++){
         list.item(i).addEventListener('click', function(e) {
-          console.log(e.target.innerHTML);
           window.location=`${baseUrl}/${e.target.innerHTML}`;
         });
       }
