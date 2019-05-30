@@ -17,11 +17,10 @@
 
   <script>
       var list=document.getElementsByTagName('li');
-      var baseUrl='http://<%= ip %>:3000';
 
       for(var i=0; i<list.length; i++){
         list.item(i).addEventListener('click', function(e) {
-          window.location=`${baseUrl}/${e.target.innerHTML}`;
+          window.location=`http://<%= ip %>/${e.target.innerHTML}`;
         });
       }
     </script>
