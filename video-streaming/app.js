@@ -4,7 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
+const loginRouter = require('./routes/login');
+const mainRouter = require('./routes/main');
 const videoplayRouter = require('./routes/videoplay');
 const uploadRouter = require('./routes/upload');
 
@@ -20,7 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', loginRouter);
+app.use('/main', mainRouter);
 app.use('/videoplay', videoplayRouter);
 app.use('/upload', uploadRouter);
 
