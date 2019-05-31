@@ -18,6 +18,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
+    fileFilter(req, file, cb) {
+        if(file.mimetype !== 'video/mp4') {
+            console.log("unsupported file is uploaded.");
+            return cb(null, false, new Error('this ext is not supported.'));
+        }
+        cb(null, true);
+    },
 });
 
 router.post('/save', upload.single("videoFile"), (req, res, next) => {
