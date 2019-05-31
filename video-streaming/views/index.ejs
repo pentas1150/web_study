@@ -13,6 +13,13 @@
         <li><%= file %></li>
       <% }); %>
     </ul>
+    <br>
+
+    <p>파일 업로드</p>
+    <form action="/upload/save" method="post" enctype="multipart/form-data">
+      <input type="file" name="videoFile">
+      <input type="submit" value="파일 업로드하기">
+  </form>
   </body>
 
   <script>
@@ -20,7 +27,7 @@
 
       for(var i=0; i<list.length; i++){
         list.item(i).addEventListener('click', function(e) {
-          window.location=`http://<%= ip %>/${e.target.innerHTML}`;
+          window.location=`http://<%= ip %>/videoplay/${e.target.innerHTML}`;
         });
       }
     </script>
