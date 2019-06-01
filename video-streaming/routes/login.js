@@ -47,8 +47,7 @@ router.post('/signup', async(req, res, next) => {
         userpw: hashpw,
       });
     
-      const result = await user.save();
-      console.log(result);
+      await user.save();
       
       res.send("<script>alert('Sign Up!!'); window.location='/';</script>");
     } catch(err) {
