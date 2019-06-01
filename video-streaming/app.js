@@ -9,7 +9,11 @@ const mainRouter = require('./routes/main');
 const videoplayRouter = require('./routes/videoplay');
 const uploadRouter = require('./routes/upload');
 
+const connect = require('./schemas');
+
 const app = express();
+
+//connect();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

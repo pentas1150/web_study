@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SIGN UP</title>
+    </head>
+
+    <body>
+        <form name="signup" action="/signup" method="post" onsubmit="return checkForm()">
+            Enter ID: <input type="text" placeholder="ID" name="id"><br>
+            Enter PW: <input type="password" placeholder="PW" name="pw"><br>
+            Enter CODE: <input type="text" placeholder="Invite Code" name="code"><br>
+            <button type="submit">Sign up</button>
+        </form>
+    </body>
+
+    <script>
+        function checkForm() {
+            if(!signup.id.value || !signup.pw.value || !signup.code.value) {
+                alert('ID, PW, 초대코드를 모두 입력해주세요.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</html>

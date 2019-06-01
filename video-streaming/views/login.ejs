@@ -5,10 +5,26 @@
     </head>
 
     <body>
-        <form action="/login" method="post">
-            <input type="text" placeholder="ID" name="id">
-            <input type="password" placeholder="PW" name="pw">
+        <form name="login" action="/login" method="post" onsubmit="return checkForm()">
+            <input type="text" placeholder="ID" name="id"><br>
+            <input type="password" placeholder="PW" name="pw"><br>
             <button type="submit">Login</button>
         </form>
+        <button onclick="moveToSignup()">Sign up</button>
     </body>
+
+    <script>
+        function checkForm() {
+            if(!login.id.value || !log.pw.value){
+                alert('ID와 PW를 모두 입력해주세요.');
+                return false;
+            }
+
+            return true;
+        }
+
+        function moveToSignup() {
+            window.location='/signup';
+        }
+    </script>
 </html>
