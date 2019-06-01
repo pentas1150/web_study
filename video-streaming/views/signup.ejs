@@ -19,6 +19,10 @@
                 alert('ID, PW, 초대코드를 모두 입력해주세요.');
                 return false;
             }
+            else if(signup.pw.value.length > 12){
+                alert('비밀번호는 12자 이하입니다.');
+                return false;
+            }
 
             return true;
         }

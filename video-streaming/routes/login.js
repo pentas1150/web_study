@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../schemas/user');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 router.get('/', (req, res, next) => {
@@ -8,16 +9,18 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/login', async(req, res, next) => {
-  console.log(`id: ${req.body.id}, pw: ${req.body.pw}`);
-
   try {
-    const result = await User.findOne({ userid: req.body.id, userpw: req.body.pw });
-    console.log(result);
+    const exUser = await User.findOne({ userid: req.body.id });
 
-    if(result) {
-      res.redirect('/main');
+    if(exUser) {
+      const result = await bcrypt.compare(req.body.pw, exUser.userpw);
+
+      if(result)
+        res.redirect('/main');
+      else
+        res.send("<script>alert('비밀번호가 맞지 않습니다.'); window.location='/';</script>");
     } else {
-      res.send("<script>alert('unknown user'); window.location='/';</script>'");  
+      res.send("<script>alert('가입되지 않은 회원입니다.'); window.location='/';</script>'");  
     }
   } catch(err) {
     console.error(err);
@@ -30,13 +33,18 @@ router.get('/signup', (rqe, res, next) => {
 });
 
 router.post('/signup', async(req, res, next) => {
-  console.log(`signup id: ${req.body.id}, signup pw: ${req.body.pw}`);
-
   if(req.body.code === process.env.INVITE_CODE) {
     try {
+      const exUser = await User.find({ userid: req.body.id });
+      if(exUser.length) {
+        return res.send("<script>alert('이미 가입된 아이디입니다.'); window.location='/signup';</script>");
+      }
+
+      const hashpw = await bcrypt.hash(req.body.pw, 12);
+
       const user = new User({
         userid: req.body.id,
-        userpw: req.body.pw,
+        userpw: hashpw,
       });
     
       const result = await user.save();
