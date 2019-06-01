@@ -10,8 +10,6 @@ const videoLocation = process.env.VIDEO_PATH;
 router.get('/', async(req, res, next) => {
   try {
     const videolist = await Videolist.find();
-    console.log(videolist);
-
     res.render('main', { filelist: videolist, ip: process.env.BASE_IP });
   } catch(err) {
     console.error(err);
@@ -19,7 +17,7 @@ router.get('/', async(req, res, next) => {
   }
 });
 
-router.get('/updateDB', (req, res, next) => {
+router.get('/updateDB', (req, res, next) => { //관리자용으로 뺄 예정
   fs.readdir(videoLocation, function(err, list) {
     if(err) {
         throw err;

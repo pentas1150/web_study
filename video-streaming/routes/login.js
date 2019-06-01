@@ -28,6 +28,7 @@ router.post('/login', async(req, res, next) => {
   }
 });
 
+//signup을 모듈화 시킬까 고민중
 router.get('/signup', (rqe, res, next) => {
   res.render('signup_tem');
 });
