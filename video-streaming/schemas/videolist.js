@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const videoSchema = new Schema({
-    index: mongoose.Schema.Types.ObjectId,
     filename: {
         type: String,
         required: true,

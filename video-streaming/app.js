@@ -13,7 +13,7 @@ const connect = require('./schemas');
 
 const app = express();
 
-//connect();
+connect();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

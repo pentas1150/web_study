@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const userSchema = new Schema({
-    index: mongoose.Schema.Types.ObjectId,
-    id: {
+    userid: {
         type: String,
         required: true,
         unique: true,
         lowercase: true,
     },
-    pw: {
+    userpw: {
         type: String,
         required: true,
         trim: true,

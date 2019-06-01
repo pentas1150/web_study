@@ -6,8 +6,8 @@ module.exports = () => {
         if(process.env.NODE_ENV !== 'production') {
             mongoose.set('debug', true);
         }
-        mongoose.connect(`mongdb://${process.env.MONG_ID}:${process.env.MONGO_PW}@localhost:27017/admin`, {
-            dbName: 'videoplay',
+        mongoose.connect(`mongodb://${process.env.MONGO_ID}:${process.env.MONGO_PW}@localhost:27017/admin`, {
+            dbName: process.env.MONGO_DB,
         }, (error) => {
             if(error) {
                 console.log('mongodb connect error', error);
@@ -18,7 +18,7 @@ module.exports = () => {
     };
 
     connect();
-    
+
     mongoose.connection.on('error', (error) => {
         console.error('mongodb connect error', error);
     });

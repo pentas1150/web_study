@@ -10,7 +10,7 @@
     <h1>Video List</h1>
     <ul>
       <% filelist.forEach(function(file) { %>
-        <li><%= file %></li>
+        <li><%= file.filename %></li>
       <% }); %>
     </ul>
     <br>
@@ -30,5 +30,6 @@
           window.location=`http://<%= ip %>/videoplay/${e.target.innerHTML}`;
         });
       }
-    </script>
+  </script>
+  
 </html>
