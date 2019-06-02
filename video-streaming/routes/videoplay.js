@@ -1,15 +1,16 @@
 const express = require('express');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 const fs = require('fs');
 require('dotenv').config();
 
 const videoLocation = process.env.VIDEO_PATH;
 
-router.get('/:video', (req, res, next) => {
+router.get('/:video', isLoggedIn, (req, res, next) => {
     res.render('video', { ip: process.env.BASE_IP, videoname: req.params.video });
 });
 
-router.get('/show/:video', function(req, res, next) {
+router.get('/show/:video', isLoggedIn, (req, res, next) => {
     const path = `${videoLocation}/${req.params.video}`;
     const stat = fs.statSync(path);
     const fileSize = stat.size;

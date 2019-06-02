@@ -9,13 +9,7 @@ require('dotenv').config();
 const videoLocation = process.env.VIDEO_PATH;
 
 router.get('/', isLoggedIn, async(req, res, next) => {
-  try {
-    const videolist = await Videolist.find().sort({ filename: 1 });
-    res.render('index', { user: req.user, filelist: videolist });
-  } catch(err) {
-    console.error(err);
-    next(err);
-  }
+  res.json(req.user);
 });
 
 router.get('/updateDB', isLoggedIn, async(req, res, next) => { //관리자용으로 뺄 예정

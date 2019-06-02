@@ -1,63 +1,39 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const User = require('../schemas/user');
 const bcrypt = require('bcryptjs');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 require('dotenv').config();
 
-router.get('/', (req, res, next) => {
+
+router.get('/', isNotLoggedIn, (req, res, next) => {
   res.render('login');
 });
 
-router.post('/login', async(req, res, next) => {
-  try {
-    const exUser = await User.findOne({ userid: req.body.id });
-
-    if(exUser) {
-      const result = await bcrypt.compare(req.body.pw, exUser.userpw);
-
-      if(result)
-        res.redirect('/main');
-      else
-        res.send("<script>alert('비밀번호가 맞지 않습니다.'); window.location='/';</script>");
-    } else {
-      res.send("<script>alert('가입되지 않은 회원입니다.'); window.location='/';</script>'");  
+router.post('/login', isNotLoggedIn, (req, res, next) => {
+  passport.authenticate('local', (authError, user, info) => {
+    if(authError) {
+      console.error(authError);
+      return next(authError);
     }
-  } catch(err) {
-    console.error(err);
-    next(err);
-  }
-});
-
-//signup을 모듈화 시킬까 고민중
-router.get('/signup', (rqe, res, next) => {
-  res.render('signup_tem');
-});
-
-router.post('/signup', async(req, res, next) => {
-  if(req.body.code === process.env.INVITE_CODE) {
-    try {
-      const exUser = await User.find({ userid: req.body.id });
-      if(exUser.length) {
-        return res.send("<script>alert('이미 가입된 아이디입니다.'); window.location='/signup';</script>");
+    if(!user) {
+      return res.send("<script>alert('ID 또는 PW가 맞지 않습니다.'); window.location='/';</script>");
+    }
+    return req.login(user, (loginError) => {
+      if(loginError) {
+        console.error(loginError);
+        return next(loginError);
       }
+      return res.redirect('/');
+    });
+  })(req, res, next);
+});
 
-      const hashpw = await bcrypt.hash(req.body.pw, 12);
-
-      const user = new User({
-        userid: req.body.id,
-        userpw: hashpw,
-      });
-    
-      await user.save();
-      
-      res.send("<script>alert('Sign Up!!'); window.location='/';</script>");
-    } catch(err) {
-      console.error(err);
-      next(err);
-    }
-  } else {
-    res.send("<script>alert('초대코드가 맞지 않습니다.'); window.location='/signup';</script>");
-  }
+router.get('/logout', isLoggedIn, (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.send("<script>alert('로그아웃 완료'); window.location='/';</script>");
 });
 
 module.exports = router;
