@@ -47,9 +47,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <video controls>
-            <source src="http://<%= ip %>/videoplay/show/<%= videoname %>" type="video/mp4">
-        </video>
+        <h1 class="mt-5">영상 목록 업데이트</h1>
+        <input type="button" value="업데이트" onclick="location.href='/admin/updateDB'">
+        <br>
+        <h1 class="mt-5">파일 업로드</h1>
+        <form action="/upload/save" method="post" enctype="multipart/form-data">
+          <input type="file" name="videoFile">
+          <input type="submit" value="파일 업로드하기">
+      </form>
       </div>
     </div>
   </div>
@@ -58,10 +63,3 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-<style>
-    video {  
-        width:100%; 
-        height:auto; 
-    }
-</style>

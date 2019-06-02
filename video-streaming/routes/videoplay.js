@@ -7,7 +7,7 @@ require('dotenv').config();
 const videoLocation = process.env.VIDEO_PATH;
 
 router.get('/:video', isLoggedIn, (req, res, next) => {
-    res.render('video', { ip: process.env.BASE_IP, videoname: req.params.video });
+    res.render('video', { user: req.user, ip: process.env.BASE_IP, videoname: req.params.video });
 });
 
 router.get('/show/:video', isLoggedIn, (req, res, next) => {
