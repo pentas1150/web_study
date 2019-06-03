@@ -2,34 +2,52 @@ const express = require('express');
 const router = express.Router();
 require('dotenv').config();
 const path = require('path');
-const multer = require('multer')
+const multer = require('multer');
+const Videolist = require('../schemas/videolist');
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination(req, file, cb) {
         cb(null, process.env.VIDEO_PATH);
     },
-    filename: function(req, file, cb) {
+    filename(req, file, cb) {
         const extension = path.extname(file.originalname);
         const basename = path.basename(file.originalname, extension);
 
         cb(null, basename + extension);
-    }
+    },
 });
 
 const upload = multer({
     storage: storage,
-    fileFilter(req, file, cb) {
-        if(file.mimetype !== 'video/mp4') {
-            console.log("unsupported file is uploaded.");
-            return cb(null, false, new Error('this ext is not supported.'));
+    async fileFilter(req, file, cb) {
+        let isInList;
+        try {
+            isInList = await Videolist.findOne({ filename: file.originalname });
+        } catch(err) {
+            console.error(err);
+            return cb(new Error(err));
+        }
+
+        if(isInList) {
+            console.log("이미 존재하는 파일입니다.");
+            return cb(new Error('이미 존재하는 파일입니다.'));
+        }
+        else if(file.mimetype !== 'video/mp4') {
+            console.log('지원되지 않는 파일 형식입니다.');
+            return cb(new Error('지원되지 않는 파일 형식입니다.'));
         }
         cb(null, true);
     },
-});
+}).single('videoFile');
 
-router.post('/save', upload.single("videoFile"), (req, res, next) => {
-    console.log(`file upload name: ${req.file.originalname}, size: ${req.file.size}`);
-    res.send("<script>alert('업로드 완료'); window.location='/admin';</script>");
+router.post('/save', (req, res, next) => {
+    upload(req, res, (err) => {
+        if(err) {
+            res.statusCode = 403;
+            return res.send("<script>alert('지원되지 않는 형식이거나 중복된 파일입니다.'); window.location='/admin';</script>");
+        }
+        res.send("<script>alert('업로드 완료'); window.location='/admin';</script>");
+    });
 });
 
 module.exports = router;
