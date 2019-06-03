@@ -41,12 +41,21 @@ const upload = multer({
 }).single('videoFile');
 
 router.post('/save', (req, res, next) => {
-    upload(req, res, (err) => {
+    upload(req, res, async(err) => {
         if(err) {
             res.statusCode = 403;
             return res.send("<script>alert('지원되지 않는 형식이거나 중복된 파일입니다.'); window.location='/admin';</script>");
         }
-        res.send("<script>alert('업로드 완료'); window.location='/admin';</script>");
+        try{
+            const newVideo = new Videolist({
+                filename: req.file.originalname,
+            });
+            await newVideo.save();
+            res.send("<script>alert('업로드 완료'); window.location='/admin';</script>");
+        } catch(err) {
+            console.error(err);
+            next(err);
+        }
     });
 });
 
