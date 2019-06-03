@@ -4,7 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const logger = require('morgan');
+const flash = require('connect-flash');
 const passport = require('passport');
+const RedisStore = require('connect-redis')(session);
 require('dotenv').config();
 
 const loginRouter = require('./routes/login');
@@ -33,13 +35,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE));
 app.use(session({
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   secret: process.env.COOKIE,
   cookie: {
     httpOnly: true,
     secure: false,
+    maxAge: 1000 * 60 * 30,
   },
+  store: new RedisStore({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    pass: process.env.REDIS_PASSWORD,
+    logErrors: true,
+  }),
 }));
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -7,6 +7,7 @@ module.exports = (passport) => {
     passport.use(new LocalStrategy({
         usernameField: 'id',
         passwordField: 'pw',
+        session: true,
     }, async(id, pw, done) => {
         try {
             const exUser = await User.findOne({ userid: id });

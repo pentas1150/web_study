@@ -5,6 +5,7 @@ const Videolist = require('../schemas/videolist');
 require('dotenv').config();
 
 router.get('/', isLoggedIn, async(req, res, next) => {
+  console.log('[debug]'+req.session.id);
   try {
     const videolist = await Videolist.find().sort({ filename: 1 });
     res.render('index', { user: req.user, filelist: videolist });

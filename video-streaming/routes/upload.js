@@ -29,7 +29,7 @@ const upload = multer({
 
 router.post('/save', upload.single("videoFile"), (req, res, next) => {
     console.log(`file upload name: ${req.file.originalname}, size: ${req.file.size}`);
-    res.redirect('/');
+    res.send("<script>alert('업로드 완료'); window.location='/admin';</script>");
 });
 
 module.exports = router;
