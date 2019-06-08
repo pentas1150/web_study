@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Table Ex</title>
+    </head>
+
+    <body>
+        <table>
+        </table>
+    </body>
+
+    <script>
+        var tb = document.getElementsByTagName('table');
+
+        for(var i=0; i<3; i++) {
+            var tr = document.createElement('tr');
+            for(var j=i*3; j<i*3+3; j++) {
+                var td = document.createElement('td');
+                var text = document.createTextNode(j);
+                td.appendChild(text);
+                tr.appendChild(td);
+            }
+            tb[0].appendChild(tr);
+        }
+    </script>
+</html>
