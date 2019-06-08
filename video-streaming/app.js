@@ -15,7 +15,7 @@ const mainRouter = require('./routes/main');
 const videoplayRouter = require('./routes/videoplay');
 const uploadRouter = require('./routes/upload');
 const adminRouter = require('./routes/admin');
-const testRouter = require('./routes/test');
+const searchRouter = require('./routes/search');
 
 const connect = require('./schemas');
 const passportConfig = require('./passport');
@@ -43,13 +43,12 @@ app.use(session({
     secure: false,
     maxAge: 1000 * 60 * 30,
   },
-  /*
   store: new RedisStore({
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT,
     pass: process.env.REDIS_PASSWORD,
     logErrors: true,
-  }),*/
+  }),
 }));
 app.use(flash());
 
@@ -62,7 +61,7 @@ app.use('/main', mainRouter);
 app.use('/videoplay', videoplayRouter);
 app.use('/upload', uploadRouter);
 app.use('/admin', adminRouter);
-app.use('/test', testRouter);
+app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
