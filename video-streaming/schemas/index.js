@@ -28,5 +28,6 @@ module.exports = () => {
     });
 
     require('./user');
-    require('./videolist');
+    require('./content');
+    require('./category');
 };

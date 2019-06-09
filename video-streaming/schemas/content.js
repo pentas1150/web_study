@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const videoSchema = new Schema({
-    filename: {
+const contentSchema = new Schema({
+    title: {
         type: String,
         required: true,
         unique: true,
+    },
+    category: {
+        type: String,
+        required: true,
     },
     createdAt: {
         type: Date,
@@ -13,4 +17,4 @@ const videoSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Videolist', videoSchema);
+module.exports = mongoose.model('Content', contentSchema);

@@ -12,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Blog Home - Start Bootstrap Template</title>
+  <title>Pentas Blog</title>
 
   <!-- Bootstrap core CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -53,16 +53,16 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Videolist
+        <h1 class="my-4">Search Result
           <!--<small>Secondary Text</small>-->
         </h1>
 
         <!-- Blog Post -->
-        <% filelist.forEach(function(file) { %>
+        <% contents.forEach(function(content) { %>
             <div class="card mb-4">
                 <div class="card-body">
-                  <h5 class="card-title"><%= file.filename %></h5>
-                  <a href="/videoplay/<%= file.filename %>" class="btn btn-primary">View &rarr;</a>
+                  <h5 class="card-title"><%= content.title %></h5>
+                  <a href="/videoplay/<%= content.title %>" class="btn btn-primary">View &rarr;</a>
                 </div>
             </div>
         <% }); %>
@@ -85,6 +85,24 @@
         </div>
       </div>
     </div>
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Categories</h5>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <ul class="list-unstyled mb-0">
+                <% category.forEach(function(name) { %>
+                  <li>
+                      <a href="/category/<%= name.category %>"><%= name.category %></a>
+                  </li>  
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- /.row -->
   </div>
   <!-- /.container -->

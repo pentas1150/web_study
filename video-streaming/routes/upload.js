@@ -3,7 +3,7 @@ const router = express.Router();
 require('dotenv').config();
 const path = require('path');
 const multer = require('multer');
-const Videolist = require('../schemas/videolist');
+const Contentlist = require('../schemas/content');
 
 const storage = multer.diskStorage({
     destination(req, file, cb) {
@@ -22,7 +22,7 @@ const upload = multer({
     async fileFilter(req, file, cb) {
         let isInList;
         try {
-            isInList = await Videolist.findOne({ filename: file.originalname });
+            isInList = await Contentlist.findOne({ title: file.originalname });
         } catch(err) {
             console.error(err);
             return cb(new Error(err));
@@ -47,8 +47,9 @@ router.post('/save', (req, res, next) => {
             return res.send("<script>alert('지원되지 않는 형식이거나 중복된 파일입니다.'); window.location='/admin';</script>");
         }
         try{
-            const newVideo = new Videolist({
-                filename: req.file.originalname,
+            const newVideo = new Contentlist({
+                title: req.file.originalname,
+                category: 'video',
             });
             await newVideo.save();
             res.send("<script>alert('업로드 완료'); window.location='/admin';</script>");

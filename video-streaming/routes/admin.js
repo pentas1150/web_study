@@ -1,7 +1,7 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
-const Videolist = require('../schemas/videolist');
+const Contentlist = require('../schemas/content');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
@@ -20,10 +20,10 @@ router.get('/updateDB', isLoggedIn, async(req, res, next) => {
         return res.send("<script>alert('관리자가 아닙니다.'); window.location='/main';</script>");
     }
     try {
-        const videolist = await Videolist.find();
-        videolist.forEach(async(video) => {
+        const contentlist = await Contentlist.find();
+        contentlist.forEach(async(content) => {
             try{
-                await Videolist.remove(video);
+                await Contentlist.remove(content);
             } catch(err) {
                 console.error(err);
                 return next(err);
@@ -43,8 +43,9 @@ router.get('/updateDB', isLoggedIn, async(req, res, next) => {
             try {
                 const fileExt = path.extname(fileName).toLowerCase();
                 if(fileExt === '.mp4'){
-                const videoname = new Videolist({
-                    filename: fileName,
+                const videoname = new Contentlist({
+                    title: fileName,
+                    category: 'video',
                 });
 
                 await videoname.save();
