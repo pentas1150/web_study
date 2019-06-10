@@ -53,7 +53,7 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Search Result
+        <h1 class="my-4">Search result for '<%= keyword %>' 
           <!--<small>Secondary Text</small>-->
         </h1>
 
@@ -83,26 +83,27 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Categories Widget -->
-    <div class="card my-4">
-        <h5 class="card-header">Categories</h5>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <ul class="list-unstyled mb-0">
-                <% category.forEach(function(name) { %>
-                  <li>
-                      <a href="/category/<%= name.category %>"><%= name.category %></a>
-                  </li>  
-                <% }) %>
-              </ul>
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <% category.forEach(function(name) { %>
+                    <li>
+                        <a href="/category/<%= name.category %>"><%= name.category %></a>
+                    </li>  
+                  <% }) %>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
     <!-- /.row -->
   </div>
   <!-- /.container -->

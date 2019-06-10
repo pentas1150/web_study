@@ -18,7 +18,7 @@ router.get('/:category/:page', isLoggedIn, async(req, res, next) => {
     const result = contentlist.slice(start, end);
 
     console.log(result.length);
-    res.render('category', { user: req.user, contents: result, category: categorylist, totalSize: contentlist.length, curCategory: req.params.category, curPage: req.params.page });
+    res.render('category', { user: req.user, contents: result, category: categorylist, lastPage: Math.ceil(contentlist.length/4), curCategory: req.params.category, curPage: req.params.page });
   } catch(err) {
     console.error(err);
     next(err);
