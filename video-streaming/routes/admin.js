@@ -7,6 +7,9 @@ const path = require('path');
 require('dotenv').config();
 
 const videoLocation = process.env.VIDEO_PATH;
+function videoContent(file) {
+    return `<video controls><source src="http://${process.env.BASE_IP}/videoplay/show/${file}" type="video/mp4"></video>`
+};
 
 router.get('/', isLoggedIn, async(req, res, next) => {
     if(req.user[0].userid !== process.env.ADMIN) {
@@ -45,6 +48,8 @@ router.get('/updateDB', isLoggedIn, async(req, res, next) => {
                 if(fileExt === '.mp4'){
                 const videoname = new Contentlist({
                     title: fileName,
+                    author: 'beewol',
+                    content: videoContent(fileName),
                     category: 'video',
                 });
 
