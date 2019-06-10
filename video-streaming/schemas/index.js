@@ -30,4 +30,5 @@ module.exports = () => {
     require('./user');
     require('./content');
     require('./category');
+    require('./comment');
 };
