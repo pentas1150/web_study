@@ -23,18 +23,11 @@ router.get('/updateDB', isLoggedIn, async(req, res, next) => {
         return res.send("<script>alert('관리자가 아닙니다.'); window.location='/main';</script>");
     }
     try {
-        const contentlist = await Contentlist.find();
-        contentlist.forEach(async(content) => {
-            try{
-                await Contentlist.remove(content);
-            } catch(err) {
-                console.error(err);
-                return next(err);
-            }
-        });
+        const contents = await Contentlist.find();
+        await Contentlist.deleteMany(contents);
     } catch(err) {
         console.error(err);
-        return next(err);
+        next(err);
     }
 
     fs.readdir(videoLocation, (err, list) => {

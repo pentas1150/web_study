@@ -26,7 +26,7 @@ router.get('/del/:id', isLoggedIn, async(req, res, next) => {
         const comment = await Comment.findById(req.params.id); 
         const contentLink = comment.content;
 
-        await Comment.remove(comment);
+        await Comment.deleteOne(comment);
         return res.redirect(`/content/${contentLink}`);
     } catch(err) {
         console.error(err);

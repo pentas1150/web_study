@@ -11,11 +11,11 @@ router.get('/', isLoggedIn, (req, res, next) => {
 
 router.get('/:page', isLoggedIn, async(req, res, next) => {
   try {
-    const skipNum = (Number(req.params.page) - 1) * 4;
     const contentCount = await Contentlist.count();
-    const contentlist = await Contentlist.find().skip(skipNum).limit(4);
+    const skipNum = (Number(req.params.page) - 1) * 4;
+    const contentlist = await Contentlist.find().skip(skipNum).limit(4).sort({ createdAt: -1 });
     const categorylist = await Categorylist.find();
-
+    
     res.render('main', { user: req.user, contents: contentlist, lastPage: Math.ceil(contentCount/4), curPage: req.params.page, category: categorylist });
   } catch(err) {
     console.error(err);

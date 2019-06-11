@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 <style>
-    body {
-        padding-top: 56px;
-    }
+  body {
+    padding-top: 56px;
+  }
+  video {
+    width: 100%;
+    height: auto;
+  }
 </style>
 
 <head>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -50,42 +55,33 @@
 
     <div class="row">
 
-      <!-- Blog Entries Column -->
-      <div class="col-md-8">
+      <!--Post Content-->
+      <div class="col-lg-8">
+        <!-- Comments Form -->
+        <div class="card my-4">
 
-        <h1 class="my-4">all contents
-          <!--<small>Secondary Text</small>-->
-        </h1>
+          <h5 class="card-header">Write Form</h5>
+          <div class="card-body">
+            <form action="/content/write/post" method="post">
+              <div class="form-group">
+                <label for="sel1">Select Category</label>
+                <select class="form-control" name="category">
+                  <% category.forEach(function(name) { %>
+                    <option><%= name.category %></option>
+                  <% }); %>
+                </select>
+                <p>Title</p>
+                <textarea name="title" class="form-control" rows="1"></textarea>
 
-        <!-- Blog Post -->
-        <% contents.forEach(function(content) { %>
-          <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title"><%= content.title %></h5>
-                <a href="/content/<%= content._id %>" class="btn btn-primary">View &rarr;</a>
+                <p>Content</p>
+                <textarea name="content" class="form-control" rows="10"></textarea>
               </div>
+              <button type="submt" class="btn btn-primary">Submit</button>
+            </form>
           </div>
-        <% }); %>
 
-        <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
-          <% if(Number(curPage) != 1) { %>
-          <li class="page-item"><a class="page-link" href="/main/<%= Number(curPage)-1 %>">Previous</a></li>
-          <% } %>
-
-          <% for(var i=1; i<=lastPage; i++) { %>
-            <% if(i === Number(curPage)) { %>
-              <li class="page-item active"><a class="page-link" href="/main/<%= i %>"><%= i %></a></li>
-            <% } else { %>
-              <li class="page-item"><a class="page-link" href="/main/<%= i %>"><%= i %></a></li>    
-            <% } %>
-          <% } %>
-
-          <% if(Number(curPage) != lastPage) { %>
-          <li class="page-item"><a class="page-link" href="/main/<%= Number(curPage)+1 %>">Next</a></li>
-          <% } %>
-        </ul>
-      </div>
+        </div>
+    </div>
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
@@ -112,26 +108,27 @@
                 <ul class="list-unstyled mb-0">
                   <% category.forEach(function(name) { %>
                     <li>
-                      <a href="/category/<%= name.category %>"><%= name.category %></a>
+                        <a href="/category/<%= name.category %>"><%= name.category %></a>
                     </li>  
-                  <% }) %>
+                  <% }); %>
                 </ul>
               </div>
             </div>
           </div>
         </div>
 
-        <!--Wrtie Button-->
+        <!--Write Button-->
         <div class="card my-4">
           <a href="/content/write/get" class="btn btn-secondary">Write</a>
         </div>
-        
+
       </div>
 
-    <!-- /.row -->
+      </div>
+      <!-- /.row -->
     </div>
-  <!-- /.container -->
-  </div>
+    <!-- /.container -->
+
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
@@ -142,7 +139,8 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
   <script>
     function searchSubmit() {
       var val = document.getElementsByName('search_form')[0].value;
@@ -156,4 +154,5 @@
   </script>
 
 </body>
+
 </html>
