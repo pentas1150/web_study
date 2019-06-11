@@ -98,7 +98,14 @@
           <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body">
-              <h5 class="mt-0"><%= comment.author %></h5>
+              <h5 class="mt-0">
+                <%= comment.author %>
+                <% if(user[0].userid === comment.author) { %>
+                <a href="/comment/del/<%= comment._id %>">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+                <% } %>
+              </h5>
               <%= comment.comment %>
             </div>
           </div>
@@ -159,7 +166,8 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
   <script>
     function searchSubmit() {
       var val = document.getElementsByName('search_form')[0].value;

@@ -21,4 +21,17 @@ router.post('/:id', isLoggedIn, async(req, res, next) => {
     res.redirect(`/content/${req.params.id}`);
 });
 
+router.get('/del/:id', isLoggedIn, async(req, res, next) => {
+    try {
+        const comment = await Comment.findById(req.params.id); 
+        const contentLink = comment.content;
+
+        await Comment.remove(comment);
+        return res.redirect(`/content/${contentLink}`);
+    } catch(err) {
+        console.error(err);
+        next(err);
+    }
+});
+
 module.exports = router;
