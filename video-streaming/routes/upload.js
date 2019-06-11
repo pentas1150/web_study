@@ -5,7 +5,7 @@ const path = require('path');
 const multer = require('multer');
 const Contentlist = require('../schemas/content');
 
-const storage = multer.diskStorage({
+const videoStorage = multer.diskStorage({
     destination(req, file, cb) {
         cb(null, process.env.VIDEO_PATH);
     },
@@ -17,8 +17,20 @@ const storage = multer.diskStorage({
     },
 });
 
+const imgStorage = multer.diskStorage({
+    destination(req, file, cb) {
+        cb(null, '/Users/jsh/git/video-streaming/public/images/');
+    },
+    filename(req, file, cb) {
+        const extension = path.extname(file.originalname);
+        const basename = path.basename(file.originalname, extension);
+
+        cb(null, Date.now() + basename + extension);
+    },
+})
+
 const upload = multer({
-    storage: storage,
+    storage: videoStorage,
     async fileFilter(req, file, cb) {
         let isInList;
         try {
@@ -40,7 +52,11 @@ const upload = multer({
     },
 }).single('videoFile');
 
-router.post('/save', (req, res, next) => {
+const imgUpload = multer({
+    storage: imgStorage,
+});
+
+router.post('/video', (req, res, next) => {
     upload(req, res, async(err) => {
         if(err) {
             res.statusCode = 403;
@@ -58,6 +74,10 @@ router.post('/save', (req, res, next) => {
             next(err);
         }
     });
+});
+
+router.post('/img', imgUpload.single('upload'), (req, res, next) => {
+    return res.json({ uploaded: true, url: `http://${process.env.BASE_IP}/img/${req.file.filename}`});
 });
 
 module.exports = router;
