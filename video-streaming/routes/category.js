@@ -11,7 +11,7 @@ router.get('/:category', isLoggedIn, (req, res, next) => {
 
 router.get('/:category/:page', isLoggedIn, async(req, res, next) => {
   try {
-    const contentCount = await Contentlist.count({ category: req.params.category });
+    const contentCount = await Contentlist.countDocuments({ category: req.params.category });
     const skipNum = (Number(req.params.page) - 1) * 4;
     const contentlist = await Contentlist.find({ category: req.params.category }).skip(skipNum).limit(4).sort({ createdAt: -1 });
     const categorylist = await Categorylist.find();

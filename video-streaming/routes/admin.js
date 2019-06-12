@@ -12,14 +12,14 @@ function videoContent(file) {
 };
 
 router.get('/', isLoggedIn, async(req, res, next) => {
-    if(req.user[0].userid !== process.env.ADMIN) {
+    if(!req.user[0].admin) {
         return res.send("<script>alert('관리자가 아닙니다.'); window.location='/main';</script>");
     }
     res.render('admin', { user: req.user });
 });
 
 router.get('/updateDB', isLoggedIn, async(req, res, next) => {
-    if(req.user[0].userid !== process.env.ADMIN) {
+    if(!req.user[0].admin) {
         return res.send("<script>alert('관리자가 아닙니다.'); window.location='/main';</script>");
     }
     try {
