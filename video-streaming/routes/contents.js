@@ -44,7 +44,9 @@ router.post('/write/post', isLoggedIn, async(req, res, next) => {
 
 router.get('/del/:id', isLoggedIn, async(req, res, next) => {
   try {
+    await Comment.deleteMany({ content: req.params.id });
     await Content.findByIdAndDelete(req.params.id);
+
     return res.redirect('/main');
   } catch(err) {
     console.error(err);
