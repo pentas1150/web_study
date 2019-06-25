@@ -42,6 +42,31 @@ router.post('/write/post', isLoggedIn, async(req, res, next) => {
   }
 });
 
+router.get('/update/post/:id', isLoggedIn, async(req, res, next) => {
+  try{
+    const categorylist = await Category.find();
+    const editContent = await Content.findById(req.params.id);
+    return res.render('updateform', { user: req.user, category: categorylist, content: editContent });
+  } catch(err) {
+    console.error(err);
+    return next(err);
+  }
+});
+
+router.post('/update/post/:id', isLoggedIn, async(req, res, next) => {
+  try {
+    await Content.findByIdAndUpdate(req.params.id, { $set: {
+      title: req.body.title,
+      content: req.body.content,
+      category: req.body.category,
+    } });
+    return res.redirect(`/content/${req.params.id}`);
+  } catch(err) {
+    console.error(err);
+    return next(err);
+  }
+});
+
 router.get('/del/:id', isLoggedIn, async(req, res, next) => {
   try {
     await Comment.deleteMany({ content: req.params.id });

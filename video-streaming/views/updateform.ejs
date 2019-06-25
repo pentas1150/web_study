@@ -4,19 +4,12 @@
   body {
     padding-top: 56px;
   }
-  video {
-    width: 100%;
-    height: auto;
+  .ck-editor__editable {
+    min-height: 300px;
   }
-  img {
-    max-width: 100%;
-    width: auto;
-    height: auto;
-  }
-</style>
+</style> 
 
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -60,72 +53,33 @@
 
     <div class="row">
 
-      <!-- Post Content Column -->
+      <!--Post Content-->
       <div class="col-lg-8">
-
-        <!-- Title -->
-        <h3 class="mt-4"><%= content.title %></h3>
-
-        <!-- Author -->
-        <p class="lead">
-          by
-          <a><%= content.author %></a>
-          <% if(user[0].userid === content.author || user[0].admin) { %>
-          <a href="/content/update/post/<%= content._id %>">
-            <i class="far fa-edit"></i>
-          </a>
-          <a href="/content/del/<%= content._id %>">
-            <i class="far fa-trash-alt"></i>
-          </a>
-          <% } %>
-        </p>
-
-        <hr>
-
-        <!-- Date/Time -->
-        <p>Posted on <%= content.createdAt %></p>
-
-        <hr>
-
-        <!-- Post Content -->
-        <%- content.content %>
-        <br>
-
-        <hr>
-
         <!-- Comments Form -->
         <div class="card my-4">
-          <h5 class="card-header">Leave a Comment:</h5>
+
+          <h5 class="card-header">Write Form</h5>
           <div class="card-body">
-            <form action="/comment/<%= content._id %>" method="post">
+            <form action="/content/update/post/<%= content._id %>" method="post">
               <div class="form-group">
-                <textarea name="comment" class="form-control" rows="3"></textarea>
+                <label for="sel1">Select Category</label>
+                <select class="form-control" name="category">
+                  <% category.forEach(function(name) { %>
+                    <option><%= name.category %></option>
+                  <% }); %>
+                </select>
+                <p>Title</p>
+                <textarea name="title" class="form-control" rows="1"><%= content.title %></textarea>
+
+                <p>Content</p>
+                <textarea name="content" id="editor"><%- content.content %></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submt" class="btn btn-primary">Submit</button>
             </form>
           </div>
+
         </div>
-
-        <!-- Single Comment -->
-        <% comments.forEach(function(comment) { %>
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">
-                <%= comment.author %>
-                <% if(user[0].userid === comment.author || user[0].admin) { %>
-                <a href="/comment/del/<%= comment._id %>">
-                  <i class="far fa-trash-alt"></i>
-                </a>
-                <% } %>
-              </h5>
-              <%= comment.comment %>
-            </div>
-          </div>
-          <hr>
-        <% }); %>
-
-      </div>
+    </div>
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
@@ -168,11 +122,10 @@
 
       </div>
 
+      </div>
+      <!-- /.row -->
     </div>
-    <!-- /.row -->
-
-  </div>
-  <!-- /.container -->
+    <!-- /.container -->
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
@@ -186,6 +139,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
   <script>
     function searchSubmit() {
       var val = document.getElementsByName('search_form')[0].value;
@@ -196,6 +150,17 @@
       window.location=`/search/${val}`;
       return true;
     }
+
+    ClassicEditor
+      .create( document.querySelector( '#editor' ), {
+        language: 'ko',
+        ckfinder: {
+          uploadUrl: '/upload/img'
+        },
+      })
+      .catch( error => {
+        console.error( error );
+      });
   </script>
 
 </body>

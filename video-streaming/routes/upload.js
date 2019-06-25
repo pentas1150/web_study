@@ -19,7 +19,7 @@ const videoStorage = multer.diskStorage({
 
 const imgStorage = multer.diskStorage({
     destination(req, file, cb) {
-        cb(null, '/Users/jsh/git/video-streaming/public/images/');
+        cb(null, process.env.IMG_PATH);
     },
     filename(req, file, cb) {
         const extension = path.extname(file.originalname);

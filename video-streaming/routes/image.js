@@ -5,7 +5,7 @@ const fs = require('fs');
 require('dotenv').config();
 
 router.get('/:img', isLoggedIn, (req, res, next) => {
-    const img = fs.createReadStream(`/Users/jsh/git/video-streaming/public/images/${req.params.img}`);
+    const img = fs.createReadStream(`${process.env.IMG_PATH}/${req.params.img}`);
     img.pipe(res);
 });
 
