@@ -7,9 +7,15 @@
 
 # Results
 1. Bootstrap을 이용한 웹페이지 구성
+
 2. 페이지네이션 및 게시글 검색 가능
+
 3. CKEditor를 이용하여 게시글 작성
+
 4. Redis Store로 session정보 저장
+
 5. MongoDB를 사용한 게시글 및 회원 정보 저장
+
 6. Passport를 사용한 local 로그인 기능 및 session
+
 7. Multer를 이용한 이미지 파일 업로드
