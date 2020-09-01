@@ -10,7 +10,8 @@
 - [Multer](https://www.npmjs.com/package/multer): 파일 업로드 패키지
 - [Sequelize](https://sequelize.org/): ORM(Object Relational Mapping) 패키지
 - [Passport](https://www.npmjs.com/package/passport): 회원가입 패키지 (Passport-kakao)
-- [Mongoose](https://mongoosejs.com/): ODM(Object Document Mapper) MongoDB의 Document를 Object로 변환해주는 
+- [Mongoose](https://mongoosejs.com/): ODM(Object Document Mapper) MongoDB의 Document를 Object로 변환해주는 패키지
+- [Redis](https://redis.io/): 오픈소스 인메모리 데이터베이스로 세션 정보 저장용으로 
 
 # Results
 1. Bootstrap을 이용한 웹페이지 구성
