@@ -1,9 +1,16 @@
 # Introduction
--시작계기
+- 시작계기
 각종 예능 동영상 파일을 클라우드에 올리는 과정이 귀찮아서 개인 웹서버로 보면 스마트폰으로도 쉽게 시청이 가능할 것 같아 개발 시작함.
 
--간단한 소개
+- 간단한 소개
 시작은 동영상 플레이였지만 점차 블로그스러운 느낌으로 웹페이지를 변경.
+
+# Using Tools
+- [Express](https://expressjs.com/): 웹 프레임워크
+- [Multer](https://www.npmjs.com/package/multer): 파일 업로드 패키지
+- [Sequelize](https://sequelize.org/): ORM(Object Relational Mapping) 패키지
+- [Passport](https://www.npmjs.com/package/passport): 회원가입 패키지 (Passport-kakao)
+- [Mongoose](https://mongoosejs.com/): ODM(Object Document Mapper) MongoDB의 Document를 Object로 변환해주는 
 
 # Results
 1. Bootstrap을 이용한 웹페이지 구성
