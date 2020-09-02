@@ -1,4 +1,5 @@
 # 첫 Blog 개발기
+Project URL: https://github.com/pentas1150/web_study/tree/master/video-streaming
 
 # Introduction
 - 시작계기
@@ -44,5 +45,3 @@
 6. Passport를 사용한 local 로그인 기능 및 session
 
 7. Multer를 이용한 이미지 파일 업로드
-
-Project URL: https://github.com/pentas1150/web_study/tree/master/video-streaming
