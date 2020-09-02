@@ -1,3 +1,5 @@
+# 첫 Blog 개발기
+
 # Introduction
 - 시작계기
   - 각종 예능 동영상 파일을 클라우드에 올리는 과정이 귀찮아서 개인 웹서버로 보면 스마트폰으로도 쉽게 시청이 가능할 것 같아 개발 시작함
@@ -42,3 +44,5 @@
 6. Passport를 사용한 local 로그인 기능 및 session
 
 7. Multer를 이용한 이미지 파일 업로드
+
+Project URL: https://github.com/pentas1150/web_study/tree/master/video-streaming
