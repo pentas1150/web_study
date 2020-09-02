@@ -14,6 +14,21 @@
 - [Redis](https://redis.io/): 오픈소스 인메모리 데이터베이스로 세션 정보 저장용으로 사용함
 
 # Results
+### Screenshots
+- 메인 화면
+<img src="https://postfiles.pstatic.net/MjAyMDA5MDJfMjk4/MDAxNTk5MDIwOTYxNzI4.m9HeCFD_e5CcfudRRgEbse7hCE5kYV4pkSToX4gXhNsg.dlR2EBLkZAqSt7NCH5s75eEw13-9IDSchaUhBIZV1sgg.PNG.ffanys_/3.png?type=w966" width="600px">
+
+- 로그인 화면
+<img src="https://postfiles.pstatic.net/MjAyMDA5MDJfNDUg/MDAxNTk5MDIwOTYwNzE4.UuxWy_fCEig9HcO_iUlcsk5EOp56z9HL79XkkFrO450g.qRcK6FV5ehS8pcMABkrKZrFivlgrrPrd_BRbdg7wr08g.PNG.ffanys_/1.png?type=w966" width="600px">
+
+- 게시글 작성 화면
+<img src="https://postfiles.pstatic.net/MjAyMDA5MDJfOCAg/MDAxNTk5MDIwOTYxNzU3.u0iXQkYf0sfdRsyI4Nn4V2AfNrA_KN8Zw2CjPFh5fG8g.MD9lqeVG3y5WR4Hs6pSi8qXbXw8sVhd2cJaNpNoOiHEg.PNG.ffanys_/2.png?type=w966" width="600px">
+
+- 게시글 및 댓글 화면
+<img src="https://postfiles.pstatic.net/MjAyMDA5MDJfMjk2/MDAxNTk5MDIwOTYxODQw.FQGgpr75-1DgomAw6T7grVXRuX2H_D_9clfDi2Imf6kg.OHkVbZ1odTGZk7XN5-bpd5qPLL3HsPyX8716g3D3LfAg.PNG.ffanys_/4.png?type=w966" width="600px">
+
+
+### Notes
 1. Bootstrap을 이용한 웹페이지 구성
 
 2. 페이지네이션 및 게시글 검색 가능
