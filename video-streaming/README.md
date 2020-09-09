@@ -11,7 +11,6 @@ Project URL: https://github.com/pentas1150/web_study/tree/master/video-streaming
 # Using Tools
 - [Express](https://expressjs.com/): 웹 프레임워크
 - [Multer](https://www.npmjs.com/package/multer): 파일 업로드 패키지
-- [Sequelize](https://sequelize.org/): ORM(Object Relational Mapper) 패키지 Mysql 튜플을 Object로 변환시켜줌
 - [Passport](https://www.npmjs.com/package/passport): 회원가입 패키지 (Passport-kakao)
 - [Mongoose](https://mongoosejs.com/): ODM(Object Document Mapper) MongoDB의 Document를 Object로 변환해주는 패키지
 - [Redis](https://redis.io/): 오픈소스 인메모리 데이터베이스로 세션 정보 저장용으로 사용함
