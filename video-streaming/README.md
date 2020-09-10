@@ -29,6 +29,14 @@ Project URL: https://github.com/pentas1150/web_study/tree/master/video-streaming
 - 게시글 및 댓글 화면
 <img src="https://postfiles.pstatic.net/MjAyMDA5MDJfMjk2/MDAxNTk5MDIwOTYxODQw.FQGgpr75-1DgomAw6T7grVXRuX2H_D_9clfDi2Imf6kg.OHkVbZ1odTGZk7XN5-bpd5qPLL3HsPyX8716g3D3LfAg.PNG.ffanys_/4.png?type=w966" width="600px">
 
+### How to Use
+- .env 파일 생성 후 아래의 변수명 기입
+  - COOKIE : 쿠키의 시크릿 키
+  - MONGO_ID : 몽고DB의 루트 아이디
+  - MONGO_PW : 몽고DB 루트 아이디의 비밀번호
+  - BASE_IP : 도메인명(or IP)과 포트번호 ex)localhost:3412
+  - INVITE_CODE : 회원가입 시 입력해야하는 가입 코드
+  - VIDEO_PATH : 동영상 파일이 저장될 디렉토리 경로
 
 ### Notes
 1. Bootstrap을 이용한 웹페이지 구성
