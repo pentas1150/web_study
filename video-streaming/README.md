@@ -34,6 +34,7 @@ Project URL: https://github.com/pentas1150/web_study/tree/master/video-streaming
   - COOKIE : 쿠키의 시크릿 키
   - MONGO_ID : 몽고DB의 루트 아이디
   - MONGO_PW : 몽고DB 루트 아이디의 비밀번호
+  - MONGO_DB : 해당 프로젝트와 연결할 DB의 이름
   - BASE_IP : 도메인명(or IP)과 포트번호 ex)localhost:3412
   - INVITE_CODE : 회원가입 시 입력해야하는 가입 코드
   - VIDEO_PATH : 동영상 파일이 저장될 디렉토리 경로
